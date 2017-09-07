@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+# Custom build for Docker Hub
+# see: https://medium.com/microscaling-systems/labelling-automated-builds-on-docker-hub-f3d073fb8e1
+
+TEXLIVE_VERSION=$(cat VERSION)
+docker build --build-arg VCS_REF=$GIT_SHA1 \
+             --build-arg VERSION=$DOCKER_TAG \
+             --build-arg TEXLIVE_VERSION=$TEXLIVE_VERSION \
+             --tag $IMAGE_NAME .
